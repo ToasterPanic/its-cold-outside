@@ -4,12 +4,10 @@ var game = null
 
 func _ready() -> void:
 	$Top/Name.text = global.buyables[get_meta("type")].name
-	$Top/Buy.text = "Buy for " + str(global.buyables[get_meta("type")].cost) + " POWER"
-	$Top/Cost.text = str(global.buyables[get_meta("type")].passive_power) + " POWER/s"
+	$Top/Buy.text = "Buy for " + global.numtext(global.buyables[get_meta("type")].cost) + " POWER"
+	$Top/Cost.text = global.numtext(global.buyables[get_meta("type")].passive_power) + " POWER/s"
 	
 	$Bottom/HBoxContainer/None.texture = load("res://textures/" + get_meta("type") + ".png")
-	
-	print(owner)
 
 func _on_buy_pressed() -> void:
 	if game.power >= global.buyables[get_meta("type")].cost:

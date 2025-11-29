@@ -2,11 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://wn75psbolp0e" path="res://textures/jeffery.png" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dt25ajg5sqcl8" path="res://scripts/game.gd" id="1_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://cgv0puwr6i68p" path="res://scenes/buyable_ui_item.tscn" id="3_lnu2h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwrxv"]
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnu2h"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_yqjtg"]
 font_size = 48
@@ -17,7 +22,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_yqjtg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-300, 0)
+position_smoothing_enabled = true
 
 [node name="Jeffery" type="TextureButton" parent="."]
 anchors_preset = 8
@@ -68,16 +73,24 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel"]
+[node name="Tabs" type="TabContainer" parent="CanvasLayer/Control/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 
-[node name="BuyableUIItem" parent="CanvasLayer/Control/Panel/VBoxContainer" instance=ExtResource("3_lnu2h")]
+[node name="Store" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lnu2h")
+metadata/_tab_index = 0
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/Panel/Tabs/Store"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 
 [node name="PowerMeter" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
