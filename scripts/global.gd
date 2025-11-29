@@ -5,24 +5,34 @@ var upgrades = {
 		"description": "Involve yourself in politics to gain POWER. Increases your energy cap to 25K, and gives access to new items in the Store.",
 		"name": "Politics",
 		"costs": {
-			"energy": 10000
+			"energy": 2500
+		}
+	},
+	"advanced_technology": {
+		"description": "Research more advanced and efficient ways to produce heat.",
+		"name": "Advanced Technology",
+		"costs": {
+			"energy": 15000,
+			"power": 750
 		}
 	},
 	"deregulation": {
 		"description": "Convince the government to give you the freedom to destroy the planet more. Increases your energy cap to 100K.",
 		"name": "Deregulation",
 		"costs": {
-			"energy": 10000,
+			"energy": 20000,
+			"power": 4000,
 			"upgrade": "politics"
 		},
 		"requires_upgrade": "politics"
 	},
 	"president": {
-		"description": "Become the president of [MYSTERY COUNTRY]! x2 multiplier to all POWER sources.",
+		"description": "Become the president of [MYSTERY COUNTRY]! x2 POWER multiplier, increases POWER cap to 25K.",
 		"name": "Presidency",
 		"costs": {
 			"energy": 20000,
-			"power": 10000
+			"power": 5000,
+			"upgrade": "politics"
 		},
 		"requires_upgrade": "politics"
 	},
@@ -52,12 +62,38 @@ var buyables = {
 		
 		"name": "Campfire",
 	},
-	"bribe": {
-		"passive_energy": 0,
-		"passive_power": 2,
+	"furnace": {
+		"passive_energy": 35,
+		"heat": 0.04,
+		"max_amount": 10,
+		"cost": 1500,
+		
+		"name": "Furnace",
+	},
+	"factory": {
+		"passive_energy": 250,
 		"heat": 0.1,
 		"max_amount": 10,
-		"cost_power": 100,
+		"cost": 12000,
+		"requires_upgrade": "advanced_technology",
+		
+		"name": "Factory",
+	},
+	"power_plant": {
+		"passive_energy": 3000,
+		"heat": 0.4,
+		"max_amount": 10,
+		"cost": 50000,
+		"requires_upgrade": "advanced_technology",
+		
+		"name": "Power Plant",
+	},
+	"bribe": {
+		"passive_energy": 0,
+		"passive_power": 5,
+		"heat": 0.1,
+		"max_amount": 10,
+		"cost": 5000,
 		"requires_upgrade": "politics",
 		
 		"name": "Bribe",

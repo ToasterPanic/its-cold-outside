@@ -15,6 +15,12 @@ func _ready() -> void:
 			text = text + "\n- Requires upgrade: " + global.upgrades[upgrade.costs[n]].name
 	
 	$Top/Details.text = text
+	
+func _process(delta: float) -> void:
+	if game.upgrades[get_meta("type")]:
+		$Top/TextureRect.modulate = Color(0.2, 1, 0.2)
+		$Bottom/Buy.disabled = true
+		$Bottom/Buy.text = "Purchased!"
 
 func _on_buy_pressed() -> void:
 	var buying = true

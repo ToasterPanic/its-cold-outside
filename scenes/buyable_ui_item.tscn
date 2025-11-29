@@ -53,7 +53,7 @@ text = "Buy for 50 POWER"
 [node name="Bottom" type="HFlowContainer" parent="."]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottom"]
+[node name="HBoxContainer" type="HFlowContainer" parent="Bottom"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1

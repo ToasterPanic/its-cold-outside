@@ -13,7 +13,7 @@ metadata/type = "politics"
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Top"]
-custom_minimum_size = Vector2(192, 192)
+custom_minimum_size = Vector2(204, 204)
 layout_mode = 2
 texture = ExtResource("2_8y2k8")
 expand_mode = 2
@@ -22,11 +22,10 @@ expand_mode = 2
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 text = "[font size=48]Politics[/font]
 test"
-fit_content = true
 scroll_active = false
 
 [node name="Bottom" type="HFlowContainer" parent="."]
@@ -36,6 +35,6 @@ alignment = 1
 [node name="Buy" type="Button" parent="Bottom"]
 layout_mode = 2
 size_flags_vertical = 4
-text = "Buy for 50 POWER"
+text = "Purchase"
 
 [connection signal="pressed" from="Bottom/Buy" to="." method="_on_buy_pressed"]
