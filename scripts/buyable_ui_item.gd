@@ -1,11 +1,21 @@
 extends VBoxContainer
 
+var game = null
+
+func _ready() -> void:
+	$Top/Name.text = global.buyables[get_meta("type")].name
+	$Top/Buy.text = "Buy for " + str(global.buyables[get_meta("type")].cost) + " POWER"
+	$Top/Cost.text = str(global.buyables[get_meta("type")].passive_power) + " POWER/s"
+	
+	$Bottom/HBoxContainer/None.texture = load("res://textures/" + get_meta("type") + ".png")
+	
+	print(owner)
 
 func _on_buy_pressed() -> void:
-	if owner.power >= global.buyables[get_meta("type")].cost:
-		owner.power -= global.buyables[get_meta("type")].cost
+	if game.power >= global.buyables[get_meta("type")].cost:
+		game.power -= global.buyables[get_meta("type")].cost
 		
-		owner.boughts[get_meta("type")] += 1
+		game.boughts[get_meta("type")] += 1
 		
 		$Bottom/HBoxContainer/None.visible = false
 		

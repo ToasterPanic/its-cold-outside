@@ -91,4 +91,18 @@ label_settings = SubResource("LabelSettings_yqjtg")
 horizontal_alignment = 1
 autowrap_mode = 1
 
+[node name="TemperatureMeter" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0°"
+label_settings = SubResource("LabelSettings_yqjtg")
+horizontal_alignment = 1
+autowrap_mode = 1
+
 [connection signal="pressed" from="Jeffery" to="." method="_on_jeffery_pressed"]
