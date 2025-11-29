@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://huj8qxqlhp60"]
+
+[ext_resource type="Script" uid="uid://c2kw7kxqpmksc" path="res://scripts/buyable_upgrade_item.gd" id="1_g7c5s"]
+[ext_resource type="Texture2D" uid="uid://w0nxsmkmtjoo" path="res://textures/campfire.png" id="2_8y2k8"]
+
+[node name="BuyableUpgradeItem" type="VBoxContainer"]
+offset_right = 727.0
+offset_bottom = 116.0
+script = ExtResource("1_g7c5s")
+metadata/type = "politics"
+
+[node name="Top" type="HFlowContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Top"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+texture = ExtResource("2_8y2k8")
+expand_mode = 2
+
+[node name="Details" type="RichTextLabel" parent="Top"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[font size=48]Politics[/font]
+test"
+fit_content = true
+scroll_active = false
+
+[node name="Bottom" type="HFlowContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Buy" type="Button" parent="Bottom"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Buy for 50 POWER"
+
+[connection signal="pressed" from="Bottom/Buy" to="." method="_on_buy_pressed"]

@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgv0puwr6i68p"]
+[gd_scene load_steps=6 format=3 uid="uid://cgv0puwr6i68p"]
 
 [ext_resource type="Texture2D" uid="uid://w0nxsmkmtjoo" path="res://textures/campfire.png" id="1_3ejx8"]
 [ext_resource type="Script" uid="uid://b5740qbech1v7" path="res://scripts/buyable_ui_item.gd" id="1_q11ar"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lbhrr"]
 font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_q11ar"]
+font_size = 24
+font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_iywne"]
 font_size = 24
@@ -24,6 +28,15 @@ custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 text = "Campfire"
 label_settings = SubResource("LabelSettings_lbhrr")
+
+[node name="Locked" type="Label" parent="Top"]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = " LOCKED! [requires Policy Reductions]"
+label_settings = SubResource("LabelSettings_q11ar")
+vertical_alignment = 1
 
 [node name="Cost" type="Label" parent="Top"]
 custom_minimum_size = Vector2(0, 48)
