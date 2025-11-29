@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="It's Cold Outside"
+run/main_scene="uid://cxwei7g8nehdn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+global="*res://scripts/global.gd"
 
 [editor_plugins]
 

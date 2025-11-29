@@ -1,3 +1,82 @@
-[gd_scene format=3 uid="uid://cxwei7g8nehdn"]
+[gd_scene load_steps=5 format=3 uid="uid://cxwei7g8nehdn"]
+
+[ext_resource type="Texture2D" uid="uid://wn75psbolp0e" path="res://textures/jeffery.png" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dt25ajg5sqcl8" path="res://scripts/game.gd" id="1_yqjtg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uwrxv"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yqjtg"]
+font_size = 48
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_yqjtg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Jeffery" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_uwrxv")
+
+[node name="ClickHint" type="Label" parent="Jeffery"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 49.0
+grow_horizontal = 2
+text = "Click Jeffery to gain POWER"
+label_settings = SubResource("LabelSettings_uwrxv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PowerMeter" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_right = 120.0
+offset_bottom = 137.0
+grow_horizontal = 2
+text = "0 POWER"
+label_settings = SubResource("LabelSettings_yqjtg")
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[connection signal="pressed" from="Jeffery" to="." method="_on_jeffery_pressed"]
