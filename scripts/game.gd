@@ -16,7 +16,16 @@ var time_to_next_passive_power = 1
 var buyable_ui_item_scene = preload("res://scenes/buyable_ui_item.tscn")
 var buyable_upgrade_item_scene = preload("res://scenes/buyable_upgrade_item.tscn")
 
+func set_power(val):
+	power = val
+
+func set_energy(val):
+	energy = val
+
 func _ready() -> void:
+	LimboConsole.register_command(set_power)
+	LimboConsole.register_command(set_energy)
+	
 	for n in global.buyables.keys():
 		boughts[n] = 0
 		

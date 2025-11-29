@@ -76,23 +76,23 @@ var buyables = {
 
 # Takes a number, makes it a string, abbreviates it by size
 func numtext(number) -> String:
-	if number >= 1e30:
-		return str(floorf(number / 1e29) / 10) + "Oc"
 	if number >= 1e27:
-		return str(floorf(number / 1e26) / 10) + "Sp"
+		return str(floorf(number / 0.1e27) / 10) + "Oc"
 	if number >= 1e24:
-		return str(floorf(number / 1e23) / 10) + "Sx"
+		return str(floorf(number / 0.1e24) / 10) + "Sp"
 	if number >= 1e21:
-		return str(floorf(number / 1e20) / 10) + "Qi"
+		return str(floorf(number / 0.1e21) / 10) + "Sx"
 	if number >= 1e18:
-		return str(floorf(number / 1e17) / 10) + "Qa"
+		return str(floorf(number / 0.1e18) / 10) + "Qi"
 	if number >= 1e15:
-		return str(floorf(number / 1e14) / 10) + "Tr"
+		return str(floorf(number / 0.1e15) / 10) + "Qa"
 	if number >= 1e12:
-		return str(floorf(number / 1e11) / 10) + "B"
+		return str(floorf(number / 0.1e12) / 10) + "Tr"
 	if number >= 1e9:
-		return str(floorf(number / 1e8) / 10) + "M"
-	if number >= 10000:
-		return str(floorf(number / 100) / 10) + "K"
+		return str(floorf(number / 0.1e9) / 10) + "B"
+	if number >= 1e6:
+		return str(floorf(number / 0.1e6) / 10) + "M"
+	if number >= 10e3:
+		return str(floorf(number / 0.1e3) / 10) + "K"
 	
 	return str(number)
