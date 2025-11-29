@@ -9,8 +9,12 @@ func _process(delta: float) -> void:
 	$Jeffery.scale.y = $Jeffery.scale.x
 	
 	$CanvasLayer/Control/PowerMeter.text = str(floori(power)) + " POWER"
+	
+	print(get_viewport().size.x)
 
+	$Camera2D.position.x = get_viewport().size.x / -4
 
+	
 func _on_jeffery_pressed() -> void:
 	power += 1
 	$Jeffery.rotation_degrees = randf_range(-5, 5)

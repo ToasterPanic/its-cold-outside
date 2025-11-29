@@ -16,6 +16,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_yqjtg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-300, 0)
 
 [node name="Jeffery" type="TextureButton" parent="."]
 anchors_preset = 8
@@ -46,7 +47,7 @@ text = "Click Jeffery to gain POWER"
 label_settings = SubResource("LabelSettings_uwrxv")
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 1
+autowrap_mode = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -59,24 +60,31 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="PowerMeter" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -120.0
-offset_right = 120.0
+anchor_right = 1.0
 offset_bottom = 137.0
 grow_horizontal = 2
 text = "0 POWER"
 label_settings = SubResource("LabelSettings_yqjtg")
 horizontal_alignment = 1
 autowrap_mode = 1
-
-[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
 
 [connection signal="pressed" from="Jeffery" to="." method="_on_jeffery_pressed"]
