@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgv0puwr6i68p"]
+
+[ext_resource type="Texture2D" uid="uid://w0nxsmkmtjoo" path="res://textures/campfire.png" id="1_3ejx8"]
+[ext_resource type="Script" uid="uid://b5740qbech1v7" path="res://scripts/buyable_ui_item.gd" id="1_q11ar"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lbhrr"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_iywne"]
+font_size = 24
+font_color = Color(0, 1, 1, 1)
+
+[node name="BuyableUIItem" type="VBoxContainer"]
+script = ExtResource("1_q11ar")
+metadata/type = "campfire"
+
+[node name="Top" type="HFlowContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Top"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Campfire"
+label_settings = SubResource("LabelSettings_lbhrr")
+
+[node name="Cost" type="Label" parent="Top"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = " 1 POWER/s"
+label_settings = SubResource("LabelSettings_iywne")
+vertical_alignment = 1
+
+[node name="Buy" type="Button" parent="Top"]
+layout_mode = 2
+text = "Buy for 50 POWER"
+
+[node name="Bottom" type="HFlowContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="None" type="TextureRect" parent="Bottom/HBoxContainer"]
+modulate = Color(0, 0, 0, 0.53333336)
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("1_3ejx8")
+expand_mode = 2
+
+[connection signal="pressed" from="Top/Buy" to="." method="_on_buy_pressed"]
