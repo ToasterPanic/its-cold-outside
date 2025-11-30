@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://huj8qxqlhp60"]
 
 [ext_resource type="Script" uid="uid://c2kw7kxqpmksc" path="res://scripts/buyable_upgrade_item.gd" id="1_g7c5s"]
-[ext_resource type="Texture2D" uid="uid://w0nxsmkmtjoo" path="res://textures/campfire.png" id="2_8y2k8"]
 [ext_resource type="AudioStream" uid="uid://c0rlm1wt6p8sw" path="res://sounds/click.mp3" id="2_ibfst"]
 [ext_resource type="AudioStream" uid="uid://di1ukgv0fmkbn" path="res://sounds/error.mp3" id="3_hkgux"]
+[ext_resource type="Texture2D" uid="uid://bvh21ly3w5evi" path="res://textures/hint_arrow.png" id="4_ibfst"]
 
 [node name="BuyableUpgradeItem" type="VBoxContainer"]
 offset_right = 727.0
@@ -23,7 +23,7 @@ layout_mode = 2
 [node name="TextureRect" type="TextureRect" parent="Top"]
 custom_minimum_size = Vector2(204, 204)
 layout_mode = 2
-texture = ExtResource("2_8y2k8")
+texture = ExtResource("4_ibfst")
 expand_mode = 2
 
 [node name="Details" type="RichTextLabel" parent="Top"]

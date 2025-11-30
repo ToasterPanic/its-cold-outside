@@ -35,7 +35,7 @@ func save():
 	var crops = []
 	for n in $"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Crops".get_children():
 		crops.push_front({
-			"type": n.type, "progress": n.progress
+			"type": n.type, "progress": n.progress, "mutation": n.mutation
 		})
 	
 	var save_dict = {
@@ -122,12 +122,16 @@ func _ready() -> void:
 				total_energy_produced = json.data.total_energy_produced
 				total_power_produced = json.data.total_power_produced
 				
+			if json.data.has("potatoes"): 
+				potatoes = json.data.potatoes
+				
 			if json.data.has("crops"): 
 				for n in json.data.crops:
 					var crop = crop_scene.instantiate()
 					
 					crop.type = n.type
 					crop.progress = n.progress
+					crop.mutation = n.mutation
 					crop.game = self
 					
 					$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Crops".add_child(crop)
@@ -235,6 +239,8 @@ func _process(delta: float) -> void:
 			alert_text = alert_text + "[font size=32]Power Cap Reached[/font]\nThe power cap has been reached, meaning you cannot gain more power. You can get upgrades to increase this value."
 				
 		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, alert_text == "")
+		
+		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, upgrades.potato_ascension)
 			
 		$"CanvasLayer/Control/Panel/Tabs/ALERT!/VBox/Text".text = alert_text
 		
@@ -258,6 +264,14 @@ Total POWER produced: %s""" % [
 	$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/SelectedImage".visible = selected_crop != null
 	if selected_crop:
 		$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/SelectedImage/TextureRect".texture = selected_crop.texture_normal
+		$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/SelectedDetails".text = """[font size=32]%s[/font]
+- Mutation #%s
+- Sensitivity %s
+- Yield 1""" % [
+		global.crops[selected_crop.type].name,
+		str(selected_crop.mutation), 
+		str(global.crops[selected_crop.type].sensitivity),
+	]
 	
 	$CanvasLayer/Control/StatMeter.text = global.numtext(energy) + " ENERGY"
 	if power > 0:
@@ -332,3 +346,13 @@ func _on_buy_potato_crop_pressed() -> void:
 	crop.game = self
 	
 	$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Crops".add_child(crop)
+
+
+func _on_mutate_crop_pressed() -> void:
+	if not selected_crop: return
+	
+	if potatoes < 5: return
+	
+	potatoes -= 5 
+	
+	selected_crop.mutate()

@@ -171,11 +171,50 @@ var buyables = {
 
 var crops = {
 	"potato": {
+		"name": "Potato",
 		"time_to_grow": 30,
 		"result_min": 1,
 		"result_max": 2,
+		"mutation_level": 2,
+		"rarity": 1,
 		"sensitivity": 0.1,
-	}
+	},
+	"golden_potato": {
+		"name": "Golden Potato",
+		"time_to_grow": 20,
+		"result_min": 15,
+		"result_max": 20,
+		"sensitivity": 0.1,
+		"mutation_level": 3,
+		"rarity": 1,
+	},
+	"helltato": {
+		"name": "Helltato",
+		"time_to_grow": 60,
+		"result_min": 6,
+		"result_max": 7,
+		"sensitivity": 0.5,
+		"mutation_level": 2,
+		"rarity": 2,
+	},
+	"cattato": {
+		"name": "Cattato",
+		"time_to_grow": 30,
+		"result_min": 3,
+		"result_max": 4,
+		"sensitivity": 0,
+		"mutation_level": 1,
+		"rarity": 3,
+	},
+	"carrot": {
+		"name": "Carrot",
+		"time_to_grow": 30,
+		"result_min": 5,
+		"result_max": 6,
+		"sensitivity": 0.2,
+		"mutation_level": 1,
+		"rarity": 1,
+	},
 }
 
 # Takes a number, makes it a string, abbreviates it by size

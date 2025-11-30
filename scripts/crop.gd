@@ -1,9 +1,30 @@
 extends TextureButton
 
 var progress = 0
+var mutation = 0
 var type = 'potato'
 var game = null
 
+func mutate():
+	mutation += 1 
+	
+	if randf() < global.crops[type].sensitivity:
+		return
+	
+	var mutation_table = []
+	
+	for n in global.crops.keys():
+		if global.crops[n].mutation_level > mutation:
+			continue 
+			
+		var i = 0
+		while i < global.crops[n].rarity:
+			mutation_table.push_front(n); i += 1
+			
+	var mutation = mutation_table[randi_range(0, mutation_table.size() - 1)]
+	
+	type = mutation
+	
 func _ready() -> void:
 	texture_normal = load("res://textures/crops/" + type + "_growing.png")
 
