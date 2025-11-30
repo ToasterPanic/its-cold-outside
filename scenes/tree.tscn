@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://4857yvvw5rom"]
+
+[ext_resource type="Texture2D" uid="uid://fvhg0f6syxm6" path="res://textures/tree_snow.png" id="1_avsvi"]
+[ext_resource type="Script" uid="uid://s2co8j47cw4r" path="res://scripts/tree.gd" id="1_viusy"]
+[ext_resource type="Texture2D" uid="uid://xr5b081n2r23" path="res://textures/tree_no_snow.png" id="2_vplca"]
+
+[node name="Tree" type="Node2D"]
+script = ExtResource("1_viusy")
+
+[node name="Snow" type="Sprite2D" parent="."]
+texture = ExtResource("1_avsvi")
+
+[node name="NoSnow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_vplca")

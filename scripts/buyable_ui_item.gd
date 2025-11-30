@@ -43,6 +43,8 @@ func _on_buy_pressed() -> void:
 		else: buying = false
 		
 	if buying:
+		$Click.play() 
+		
 		game.boughts[get_meta("type")] += 1
 		
 		$Bottom/HBoxContainer/None.visible = false
@@ -52,3 +54,5 @@ func _on_buy_pressed() -> void:
 		new_item.visible = true
 		$Bottom/HBoxContainer.add_child(new_item)
 		new_item.modulate = Color(1,1,1,1)
+	else:
+		$Error.play()

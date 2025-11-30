@@ -40,6 +40,8 @@ func _on_buy_pressed() -> void:
 				break
 	
 	if buying:
+		$Click.play()
+		
 		for n in upgrade.costs.keys():
 			if n == "energy":
 				game.energy -= upgrade.costs[n]
@@ -47,3 +49,5 @@ func _on_buy_pressed() -> void:
 				game.power -= upgrade.costs[n]
 		
 		game.upgrades[get_meta("type")] = true
+	else:
+		$Error.play()

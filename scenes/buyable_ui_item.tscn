@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgv0puwr6i68p"]
+[gd_scene load_steps=8 format=3 uid="uid://cgv0puwr6i68p"]
 
 [ext_resource type="Texture2D" uid="uid://w0nxsmkmtjoo" path="res://textures/campfire.png" id="1_3ejx8"]
 [ext_resource type="Script" uid="uid://b5740qbech1v7" path="res://scripts/buyable_ui_item.gd" id="1_q11ar"]
+[ext_resource type="AudioStream" uid="uid://c0rlm1wt6p8sw" path="res://sounds/click.mp3" id="2_mybrt"]
+[ext_resource type="AudioStream" uid="uid://di1ukgv0fmkbn" path="res://sounds/error.mp3" id="3_s8im8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lbhrr"]
 font_size = 32
@@ -19,6 +21,12 @@ offset_right = 727.0
 offset_bottom = 116.0
 script = ExtResource("1_q11ar")
 metadata/type = "campfire"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mybrt")
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_s8im8")
 
 [node name="Top" type="HFlowContainer" parent="."]
 layout_mode = 2

@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://huj8qxqlhp60"]
+[gd_scene load_steps=5 format=3 uid="uid://huj8qxqlhp60"]
 
 [ext_resource type="Script" uid="uid://c2kw7kxqpmksc" path="res://scripts/buyable_upgrade_item.gd" id="1_g7c5s"]
 [ext_resource type="Texture2D" uid="uid://w0nxsmkmtjoo" path="res://textures/campfire.png" id="2_8y2k8"]
+[ext_resource type="AudioStream" uid="uid://c0rlm1wt6p8sw" path="res://sounds/click.mp3" id="2_ibfst"]
+[ext_resource type="AudioStream" uid="uid://di1ukgv0fmkbn" path="res://sounds/error.mp3" id="3_hkgux"]
 
 [node name="BuyableUpgradeItem" type="VBoxContainer"]
 offset_right = 727.0
 offset_bottom = 116.0
 script = ExtResource("1_g7c5s")
 metadata/type = "politics"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ibfst")
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hkgux")
 
 [node name="Top" type="HFlowContainer" parent="."]
 layout_mode = 2

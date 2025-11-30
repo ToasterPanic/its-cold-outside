@@ -4,6 +4,7 @@ var power = 0
 var energy = 0
 var temperature = -10
 var tutorial_progress = 0
+var rebirths = 0
 var energy_capped = false
 
 var master_volume = 1
@@ -15,6 +16,11 @@ var boughts = {
 }
 var upgrades = {
 	
+}
+
+var save_stats = {
+	"lifetime_energy": 0,
+	"lifetime_power": 0
 }
 
 var time_to_next_passive_power = 0.01
@@ -32,7 +38,8 @@ func save():
 		"tutorial_progress": tutorial_progress,
 		"master_volume": master_volume,
 		"music_volume": music_volume,
-		"sfx_volume": sfx_volume
+		"sfx_volume": sfx_volume,
+		"stats": save_stats,
 	}
 	return save_dict
 	
@@ -99,6 +106,8 @@ func _ready() -> void:
 				master_volume = json.data.master_volume
 				music_volume = json.data.music_volume
 				sfx_volume = json.data.sfx_volume
+				
+			if json.data.has("stats"): save_stats = json.data.stats
 				
 			AudioServer.set_bus_volume_linear(0, master_volume)
 			AudioServer.set_bus_volume_linear(1, music_volume)
@@ -230,6 +239,8 @@ func _on_jeffery_pressed() -> void:
 	$Jeffery.scale.x = 1.1
 	$Jeffery.scale.y = 1.1
 	
+	$JefferyClick.play()
+	
 	$Jeffery/ClickHint.visible = false
 
 
@@ -244,3 +255,7 @@ func _on_music_volume_value_changed(value: float) -> void:
 func _on_sfx_volume_value_changed(value: float) -> void:
 	sfx_volume = value
 	AudioServer.set_bus_volume_linear(2, value)
+
+
+func _on_tabs_tab_changed(tab: int) -> void:
+	$Click.play()

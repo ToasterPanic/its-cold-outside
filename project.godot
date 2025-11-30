@@ -13,6 +13,7 @@ config_version=5
 config/name="It's Cold Outside"
 run/main_scene="uid://cxwei7g8nehdn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(1, 1, 1, 1)
 config/icon="res://icon.svg"
 
 [autoload]
@@ -46,3 +47,4 @@ limbo_console_search_history={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.27450982, 0.34509805, 0.65882355, 1)
