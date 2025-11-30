@@ -18,10 +18,8 @@ var upgrades = {
 	
 }
 
-var save_stats = {
-	"lifetime_energy": 0,
-	"lifetime_power": 0
-}
+var total_energy_produced = 0
+var total_power_produced = 0
 
 var time_to_next_passive_power = 0.01
 var time_to_next_autosave = 2
@@ -39,7 +37,8 @@ func save():
 		"master_volume": master_volume,
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
-		"stats": save_stats,
+		"total_energy_produced": total_energy_produced,
+		"total_power_produced": total_power_produced
 	}
 	return save_dict
 	
@@ -107,7 +106,9 @@ func _ready() -> void:
 				music_volume = json.data.music_volume
 				sfx_volume = json.data.sfx_volume
 				
-			if json.data.has("stats"): save_stats = json.data.stats
+			if json.data.has("total_power_produced"): 
+				total_energy_produced = json.data.total_energy_produced
+				total_power_produced = json.data.total_power_produced
 				
 			AudioServer.set_bus_volume_linear(0, master_volume)
 			AudioServer.set_bus_volume_linear(1, music_volume)
@@ -144,18 +145,32 @@ func _process(delta: float) -> void:
 		
 		temperature = -10
 		
+		var energy_per_second = 0
+		var power_per_second = 0
+		
 		var power_multiplier = 1
 		if upgrades.president: power_multiplier *= 2
 		
 		for n in boughts.keys(): 
-			if global.buyables[n].has("passive_power"): power += global.buyables[n].passive_power * boughts[n] * power_multiplier
-			else: energy += global.buyables[n].passive_energy * boughts[n]
+			if global.buyables[n].has("passive_power"): 
+				power += global.buyables[n].passive_power * boughts[n] * power_multiplier
+				power_per_second += global.buyables[n].passive_power * boughts[n] * power_multiplier
+			else: 
+				energy += global.buyables[n].passive_energy * boughts[n]
+				energy_per_second += global.buyables[n].passive_energy * boughts[n]
 			
 			temperature += global.buyables[n].heat * boughts[n]
 			
+		total_energy_produced += energy_per_second
+		total_power_produced += power_per_second
+			
 		var energy_capped = false
 			
-		if upgrades.deregulation:
+		if upgrades.dictatorship:
+			if energy > 250000000000:
+				energy = 250000000000
+				energy_capped = true
+		elif upgrades.deregulation:
 			if energy > 1000000:
 				energy = 1000000
 				energy_capped = true
@@ -191,6 +206,17 @@ func _process(delta: float) -> void:
 		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, alert_text == "")
 			
 		$"CanvasLayer/Control/Panel/Tabs/ALERT!/VBox/Text".text = alert_text
+		
+		$CanvasLayer/Control/Panel/Tabs/Status/VBox/Label.text = """ENERGY income: %s per second
+POWER income: %s per second
+
+Total ENERGY produced: %s
+Total POWER produced: %s""" % [
+		global.numtext(energy_per_second), 
+		global.numtext(power_per_second),
+		global.numtext(total_energy_produced),
+		global.numtext(total_power_produced)
+	]
 		
 	$Jeffery.rotation_degrees /= 1 + (delta * 6)
 	$Jeffery.scale.x -= ($Jeffery.scale.x - 1) * (delta * 3)

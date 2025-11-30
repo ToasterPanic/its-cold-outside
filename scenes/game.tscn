@@ -71,6 +71,18 @@ scale = Vector2(0.6, 0.6)
 position = Vector2(444, -365)
 scale = Vector2(0.6, 0.6)
 
+[node name="Sprite2D21" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(1137, -396)
+scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D22" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(-877, -365.00003)
+scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D23" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(-1309, -374.00003)
+scale = Vector2(0.6, 0.6)
+
 [node name="Sprite2D15" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(-502, -396)
 scale = Vector2(0.6, 0.6)
@@ -81,6 +93,21 @@ scale = Vector2(-0.6, 0.6)
 
 [node name="Sprite2D9" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(-242, -335.00003)
+rotation = 3.1415927
+scale = Vector2(0.8, -0.8)
+
+[node name="Sprite2D24" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(-951.99994, -318)
+rotation = 3.1415927
+scale = Vector2(0.8, -0.8)
+
+[node name="Sprite2D25" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(-1375.9999, -313.00003)
+rotation = 3.1415927
+scale = Vector2(0.8, -0.8)
+
+[node name="Sprite2D26" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(-1638, -306)
 rotation = 3.1415927
 scale = Vector2(0.8, -0.8)
 
@@ -96,6 +123,16 @@ scale = Vector2(-0.8, -0.8)
 
 [node name="Sprite2D12" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(-647.99994, -323)
+rotation = 3.1415927
+scale = Vector2(-0.8, -0.8)
+
+[node name="Sprite2D19" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(941, -323)
+rotation = 3.1415927
+scale = Vector2(-0.8, -0.8)
+
+[node name="Sprite2D20" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(1342, -325)
 rotation = 3.1415927
 scale = Vector2(-0.8, -0.8)
 
@@ -133,8 +170,15 @@ autowrap_mode = 3
 [node name="Sprite2D7" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(314, -219)
 
+[node name="Sprite2D18" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(-1096, -231)
+
 [node name="Sprite2D8" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(-410, -238)
+scale = Vector2(-1, 1)
+
+[node name="Sprite2D17" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(1061, -210)
 scale = Vector2(-1, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

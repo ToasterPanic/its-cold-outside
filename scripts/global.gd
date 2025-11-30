@@ -35,21 +35,22 @@ var upgrades = {
 		},
 	},
 	"dictatorship": {
-		"description": "Gain total control! Additional x2 POWER multiplier, increases POWER cap to 200K.",
+		"description": "Gain total control! Increases energy cap to 250B, increases POWER cap to 200K.",
 		"name": "Dictatorship",
 		"costs": {
-			"energy": 100000,
+			"energy": 1000000,
 			"power": 50000,
-			"upgrade": "president"
+			"upgrade": "president",
 		},
 	},
-	"research": {
-		"description": "Reveals new",
-		"name": "Research",
+	"natural_technology": {
+		"description": "Sometimes the best solutions are the ones that Mother Nature gave us. Gives you more items in the Store.",
+		"name": "Natural Technology",
 		"costs": {
-			"energy": 10000
+			"energy": 1000000,
+			"upgrade": "advanced_technology"
 		}
-	}
+	},
 }
 
 var buyables = {
@@ -99,10 +100,37 @@ var buyables = {
 		"passive_energy": 40000,
 		"heat": 0.5,
 		"max_amount": 10,
-		"cost": 100000,
+		"cost": 500000,
 		"requires_upgrade": "advanced_technology",
 		
-		"name": "Power Plant",
+		"name": "AI Datacenter",
+	},
+	"volcano": {
+		"passive_energy": 300000,
+		"heat": 1,
+		"max_amount": 10,
+		"cost": 50000000,
+		"requires_upgrade": "natural_technology",
+		
+		"name": "Volcano",
+	},
+	"star": {
+		"passive_energy": 1000000,
+		"heat": 3,
+		"max_amount": 10,
+		"cost": 1000000000,
+		"requires_upgrade": "natural_technology",
+		
+		"name": "Star",
+	},
+	"supernova": {
+		"passive_energy": 50000000000,
+		"heat": 25,
+		"max_amount": 10,
+		"cost": 250000000000000,
+		"requires_upgrade": "natural_technology",
+		
+		"name": "Supernova",
 	},
 	"bribe": {
 		"passive_energy": 0,
