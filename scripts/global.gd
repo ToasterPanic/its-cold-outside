@@ -35,7 +35,7 @@ var upgrades = {
 		},
 	},
 	"potato_ascension": {
-		"description": "Farm potatoes for the Potato God. Farm potatoes for the Potato God. Farm potatoes for the Potato God. Farm potatoes for the Potato God. Farm potatoes for the Potato God.",
+		"description": "Farm potatoes for the Potato God. Allows you to Ascend (find it in the Status tab).",
 		"name": "Potato Ascension",
 		"costs": {
 			"energy": 50000
@@ -213,8 +213,8 @@ var crops = {
 		"result_max": 6,
 		"sensitivity": 0.2,
 		"mutation_level": 1,
-		"rarity": 1,
-	},
+		"rarity": 2,
+	}
 }
 
 # Takes a number, makes it a string, abbreviates it by size

@@ -5,7 +5,8 @@ var energy = 0
 var potatoes = 0
 var temperature = -10
 var tutorial_progress = 0
-var rebirths = 0
+var ascensions = 0
+var ascension_level = 0
 var energy_capped = false
 
 var master_volume = 1
@@ -50,7 +51,9 @@ func save():
 		"total_energy_produced": total_energy_produced,
 		"total_power_produced": total_power_produced,
 		"crops": crops,
-		"potatoes": potatoes
+		"potatoes": potatoes,
+		"ascensions": ascensions,
+		"ascension_level": ascension_level,
 	}
 	return save_dict
 	
@@ -108,10 +111,11 @@ func _ready() -> void:
 				print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
 				continue
 				
-			power = floori(json.data.power)
-			energy = floori(json.data.energy)
-			boughts = json.data.boughts
-			upgrades = json.data.upgrades
+			if json.data.has("power"):
+				power = floori(json.data.power)
+				energy = floori(json.data.energy)
+				boughts = json.data.boughts
+				upgrades = json.data.upgrades
 			
 			if json.data.has("master_volume"):
 				master_volume = json.data.master_volume
@@ -124,6 +128,13 @@ func _ready() -> void:
 				
 			if json.data.has("potatoes"): 
 				potatoes = json.data.potatoes
+				
+			if json.data.has("ascensions"): 
+				ascensions = json.data.ascensions
+				ascension_level = json.data.ascension_level
+				
+				if ascensions > 0:
+					upgrades.potato_ascension = true
 				
 			if json.data.has("crops"): 
 				for n in json.data.crops:
@@ -140,7 +151,8 @@ func _ready() -> void:
 			AudioServer.set_bus_volume_linear(1, music_volume)
 			AudioServer.set_bus_volume_linear(2, sfx_volume)
 			
-			tutorial_progress = floori(json.data.tutorial_progress)
+			if json.data.has("tutorial_progress"):
+				tutorial_progress = floori(json.data.tutorial_progress)
 			print("TUT" + global.numtext(tutorial_progress))
 		
 	
@@ -240,19 +252,24 @@ func _process(delta: float) -> void:
 				
 		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, alert_text == "")
 		
-		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, upgrades.potato_ascension)
+		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(4, !upgrades.potato_ascension)
 			
 		$"CanvasLayer/Control/Panel/Tabs/ALERT!/VBox/Text".text = alert_text
 		
-		$CanvasLayer/Control/Panel/Tabs/Status/VBox/Label.text = """ENERGY income: %s per second
-POWER income: %s per second
+		$CanvasLayer/Control/Panel/Tabs/Status/VBox/Label.text = """ENERGY income: %s/s
+POWER income: %s/s
 
 Total ENERGY produced: %s
-Total POWER produced: %s""" % [
+Total POWER produced: %s
+
+Ascensions: %s
+Ascension level: %s""" % [
 		global.numtext(energy_per_second), 
 		global.numtext(power_per_second),
 		global.numtext(total_energy_produced),
-		global.numtext(total_power_produced)
+		global.numtext(total_power_produced),
+		floorf(ascensions),
+		global.numtext(floorf(ascension_level))
 	]
 		
 	$Jeffery.rotation_degrees /= 1 + (delta * 6)
@@ -356,3 +373,20 @@ func _on_mutate_crop_pressed() -> void:
 	potatoes -= 5 
 	
 	selected_crop.mutate()
+
+
+func _on_ascend_pressed() -> void:
+	var dir = DirAccess.remove_absolute("user://savegame.save")
+	
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	
+	var json_string = JSON.stringify({
+		"ascensions": ascensions + 1,
+		"ascension_level": potatoes / 100
+	})
+
+	save_file.store_line(json_string)
+	
+	save_file.close()
+	
+	get_tree().change_scene_to_file("res://scenes/game.tscn")

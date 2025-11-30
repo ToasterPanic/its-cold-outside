@@ -56,13 +56,13 @@ position_smoothing_enabled = true
 [node name="Ground" type="Node2D" parent="."]
 script = ExtResource("5_vtaks")
 
-[node name="Snow" type="Sprite2D" parent="Ground"]
-position = Vector2(-51, 552)
-texture = ExtResource("3_p57ef")
-
 [node name="NoSnow" type="Sprite2D" parent="Ground"]
 position = Vector2(-51, 552)
 texture = ExtResource("7_kvpfn")
+
+[node name="Snow" type="Sprite2D" parent="Ground"]
+position = Vector2(-51, 552)
+texture = ExtResource("3_p57ef")
 
 [node name="Sprite2D13" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(-58.00003, -367)
@@ -268,7 +268,7 @@ label_settings = SubResource("LabelSettings_p57ef")
 [node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Status/VBox"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Control/Panel/Tabs/Status/VBox/HFlowContainer"]
+[node name="Ascend" type="Button" parent="CanvasLayer/Control/Panel/Tabs/Status/VBox/HFlowContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 text = "ASCEND"
@@ -473,6 +473,7 @@ texture = ExtResource("3_lnu2h")
 
 [connection signal="pressed" from="Jeffery" to="." method="_on_jeffery_pressed"]
 [connection signal="tab_changed" from="CanvasLayer/Control/Panel/Tabs" to="." method="_on_tabs_tab_changed"]
+[connection signal="pressed" from="CanvasLayer/Control/Panel/Tabs/Status/VBox/HFlowContainer/Ascend" to="." method="_on_ascend_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/HFlowContainer/BuyPotatoCrop" to="." method="_on_buy_potato_crop_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Selection/MutateCrop" to="." method="_on_mutate_crop_pressed"]
 [connection signal="value_changed" from="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow/MasterVolume" to="." method="_on_master_volume_value_changed"]

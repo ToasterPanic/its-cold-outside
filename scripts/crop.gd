@@ -9,12 +9,14 @@ func mutate():
 	mutation += 1 
 	
 	if randf() < global.crops[type].sensitivity:
+		print("FAILURE too sensitive")
 		return
 	
 	var mutation_table = []
 	
 	for n in global.crops.keys():
 		if global.crops[n].mutation_level > mutation:
+			print("no " + n)
 			continue 
 			
 		var i = 0
@@ -22,8 +24,12 @@ func mutate():
 			mutation_table.push_front(n); i += 1
 			
 	var mutation = mutation_table[randi_range(0, mutation_table.size() - 1)]
+	print(mutation)
 	
 	type = mutation
+	
+	progress = 0
+	texture_normal = load("res://textures/crops/" + type + "_growing.png")
 	
 func _ready() -> void:
 	texture_normal = load("res://textures/crops/" + type + "_growing.png")
@@ -59,6 +65,11 @@ func _on_pressed() -> void:
 		
 		texture_normal = load("res://textures/crops/" + type + "_growing.png")
 		
-		game.potatoes += 1
+		var addition = randi_range(global.crops[type].result_min, global.crops[type].result_max) 
+		
+		if game.ascensions > 0:
+			addition *= 1.5
+		
+		game.potatoes += ceili(addition)
 	else:
 		progress += 1.5 / global.crops[type].time_to_grow
