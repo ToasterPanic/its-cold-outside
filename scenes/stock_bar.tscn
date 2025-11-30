@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://gy5bcmmwlycs"]
+
+[node name="StockBar" type="ColorRect"]
+custom_minimum_size = Vector2(16, 32)
+color = Color(1, 0, 0, 1)
+metadata/value = 0.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cxwei7g8nehdn"]
+[gd_scene load_steps=20 format=3 uid="uid://cxwei7g8nehdn"]
 
 [ext_resource type="Texture2D" uid="uid://wn75psbolp0e" path="res://textures/jeffery.png" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dt25ajg5sqcl8" path="res://scripts/game.gd" id="1_yqjtg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dl60kqsx1d4mf" path="res://textures/ground_no_snow.png" id="7_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://4857yvvw5rom" path="res://scenes/tree.tscn" id="8_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://b5bg1ltm73lio" path="res://textures/crops/potato_grown.png" id="10_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://gy5bcmmwlycs" path="res://scenes/stock_bar.tscn" id="12_kvuet"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwrxv"]
 outline_size = 4
@@ -63,6 +64,14 @@ position_smoothing_enabled = true
 
 [node name="Ground" type="Node2D" parent="."]
 script = ExtResource("5_vtaks")
+
+[node name="Dead" type="Sprite2D" parent="Ground"]
+position = Vector2(-51, 552)
+texture = ExtResource("7_kvpfn")
+
+[node name="Dying" type="Sprite2D" parent="Ground"]
+position = Vector2(-51, 552)
+texture = ExtResource("7_kvpfn")
 
 [node name="NoSnow" type="Sprite2D" parent="Ground"]
 position = Vector2(-51, 552)
@@ -215,7 +224,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 3
+current_tab = 5
 
 [node name="ALERT!" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
 visible = false
@@ -257,6 +266,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 
 [node name="Status" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lnu2h")
 metadata/_tab_index = 3
@@ -354,11 +364,60 @@ text = "Stabilize Crop [10 POTATOES]"
 layout_mode = 2
 alignment = 1
 
+[node name="Stock Market" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lnu2h")
+metadata/_tab_index = 5
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/Panel/Tabs/Stock Market"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/Tabs/Stock Market/VBox"]
+layout_mode = 2
+text = ":3"
+
+[node name="Stocks" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Stock Market/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="StockItem" type="Button" parent="CanvasLayer/Control/Panel/Tabs/Stock Market/VBox/Stocks"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/Control/Panel/Tabs/Stock Market/VBox/Stocks/StockItem"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[color=f00][font size=48]APPL[/font]"
+
+[node name="Flow" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Stock Market/VBox/Stocks/StockItem"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StockBar" parent="CanvasLayer/Control/Panel/Tabs/Stock Market/VBox/Stocks/StockItem/Flow" instance=ExtResource("12_kvuet")]
+layout_mode = 2
+
 [node name="Settings" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lnu2h")
-metadata/_tab_index = 5
+metadata/_tab_index = 6
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/Panel/Tabs/Settings"]
 layout_mode = 2

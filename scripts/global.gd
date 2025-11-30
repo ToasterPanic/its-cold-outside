@@ -34,6 +34,15 @@ var upgrades = {
 			"upgrade": "politics"
 		},
 	},
+	"stock_market": {
+		"description": "Gain access to the stock market. Buy low, sell high. Simple.",
+		"name": "Stock Market",
+		"costs": {
+			"energy": 50000,
+			"power": 50000,
+			"upgrade": "politics"
+		},
+	},
 	"potato_ascension": {
 		"description": "Farm potatoes for the Potato God. Allows you to Ascend (find it in the Status tab).",
 		"name": "Potato Ascension",
@@ -215,6 +224,37 @@ var crops = {
 		"mutation_level": 1,
 		"rarity": 2,
 	}
+}
+
+var stocks = {
+	"PEAR": {
+		"stability": 0.7,
+		"size": 10,
+		"min_value": 20,
+		"max_value": 500,
+		"minimum_direction_time": 5,
+	},
+	"SFI": {
+		"stability": 0.7,
+		"size": 10,
+		"min_value": 20,
+		"max_value": 500,
+		"minimum_direction_time": 5,
+	},
+	"UWU": {
+		"stability": 0.7,
+		"size": 10,
+		"min_value": 20,
+		"max_value": 500,
+		"minimum_direction_time": 5,
+	},
+	"HACK": {
+		"stability": 0.7,
+		"size": 10,
+		"min_value": 20,
+		"max_value": 500,
+		"minimum_direction_time": 5,
+	},
 }
 
 # Takes a number, makes it a string, abbreviates it by size
