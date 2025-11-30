@@ -24,9 +24,11 @@ metadata/type = "campfire"
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mybrt")
+bus = &"SFX"
 
 [node name="Error" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_s8im8")
+bus = &"SFX"
 
 [node name="Top" type="HFlowContainer" parent="."]
 layout_mode = 2

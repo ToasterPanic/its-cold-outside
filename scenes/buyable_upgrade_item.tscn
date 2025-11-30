@@ -13,9 +13,11 @@ metadata/type = "politics"
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ibfst")
+bus = &"SFX"
 
 [node name="Error" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_hkgux")
+bus = &"SFX"
 
 [node name="Top" type="HFlowContainer" parent="."]
 layout_mode = 2
