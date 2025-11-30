@@ -62,6 +62,7 @@ func _on_pressed() -> void:
 		
 	if progress == -1:
 		progress = 0
+		$Jeffery.play()
 		
 		texture_normal = load("res://textures/crops/" + type + "_growing.png")
 		
@@ -72,4 +73,5 @@ func _on_pressed() -> void:
 		
 		game.potatoes += ceili(addition)
 	else:
+		$PopFarming.play()
 		progress += 1.5 / global.crops[type].time_to_grow

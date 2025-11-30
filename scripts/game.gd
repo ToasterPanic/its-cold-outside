@@ -8,6 +8,7 @@ var tutorial_progress = 0
 var ascensions = 0
 var ascension_level = 0
 var energy_capped = false
+var power_capped = false
 
 var master_volume = 1
 var music_volume = 1
@@ -31,6 +32,15 @@ var time_to_next_autosave = 2
 var buyable_ui_item_scene = preload("res://scenes/buyable_ui_item.tscn")
 var buyable_upgrade_item_scene = preload("res://scenes/buyable_upgrade_item.tscn")
 var crop_scene = preload("res://scenes/crop.tscn")
+var alert_scene = preload("res://scenes/alert.tscn")
+
+func create_alert(name, desc):
+	var alert = alert_scene.instantiate()
+	
+	alert.get_node("VBox/Label").text = """[font size=32]%s[/font]
+%s""" % [name, desc]
+
+	$CanvasLayer/Control/Alerts.add_child(alert)
 
 func save():
 	var crops = []
@@ -201,8 +211,11 @@ func _process(delta: float) -> void:
 			
 		total_energy_produced += energy_per_second
 		total_power_produced += power_per_second
+		
+		var send_energy_cap_alert = !energy_capped
+		var send_power_cap_alert = !power_capped
 			
-		var energy_capped = false
+		energy_capped = false
 			
 		if upgrades.power_of_god:
 			pass
@@ -223,7 +236,7 @@ func _process(delta: float) -> void:
 				energy = 10000
 				energy_capped = true
 				
-		var power_capped = false
+		power_capped = false
 				
 				
 		if upgrades.power_of_god:
@@ -242,19 +255,21 @@ func _process(delta: float) -> void:
 				power_capped = true
 				
 		var alert_text = ""
-				
-		
 		
 		if energy_capped:
 			alert_text = alert_text + "[font size=32]Energy Cap Reached[/font]\nThe energy cap has been reached, meaning you cannot gain more energy. You can get upgrades to increase this value."
+			if send_energy_cap_alert:
+				create_alert("ENERGY Cap Reached", "You've reached the ENERGY cap! You need to buy upgrades if you want to gain more ENERGY.")
 		if power_capped:
+			if send_power_cap_alert:
+				create_alert("POWER Cap Reached", "You've reached the POWER cap! You need to buy upgrades if you want to gain more POWER.")
 			alert_text = alert_text + "[font size=32]Power Cap Reached[/font]\nThe power cap has been reached, meaning you cannot gain more power. You can get upgrades to increase this value."
 				
-		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, alert_text == "")
+		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, true)
 		
 		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(4, !upgrades.potato_ascension)
 			
-		$"CanvasLayer/Control/Panel/Tabs/ALERT!/VBox/Text".text = alert_text
+		#$"CanvasLayer/Control/Panel/Tabs/ALERT!/VBox/Text".text = alert_text
 		
 		$CanvasLayer/Control/Panel/Tabs/Status/VBox/Label.text = """ENERGY income: %s/s
 POWER income: %s/s
@@ -395,3 +410,7 @@ func _on_ascend_pressed() -> void:
 	save_file.close()
 	
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
+
+
+func _on_delete_save_meter_value_changed(value: float) -> void:
+	if value == 1: delete_save_game()

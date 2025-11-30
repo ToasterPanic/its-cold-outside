@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1i62luj5dct0"]
+
+[ext_resource type="Script" uid="uid://b57hocju4uer1" path="res://scripts/alert.gd" id="1_hrwfd"]
+[ext_resource type="AudioStream" uid="uid://c0rlm1wt6p8sw" path="res://sounds/click.mp3" id="2_uxd1m"]
+
+[node name="Alert" type="PanelContainer"]
+script = ExtResource("1_hrwfd")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_uxd1m")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="RichTextLabel" parent="VBox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "You've reached the ENERGY cap. You'll need to buy upgrades if you want to gain more ENERGY."
+fit_content = true
+
+[node name="Button" type="Button" parent="VBox"]
+layout_mode = 2
+text = "Close"
+
+[connection signal="pressed" from="VBox/Button" to="." method="_on_button_pressed"]
