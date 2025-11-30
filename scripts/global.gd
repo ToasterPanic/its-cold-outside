@@ -122,7 +122,7 @@ var buyables = {
 		"name": "AI Datacenter",
 	},
 	"volcano": {
-		"passive_energy": 300000,
+		"passive_energy": 1000000,
 		"heat": 1,
 		"max_amount": 10,
 		"cost": 50000000,
@@ -131,7 +131,7 @@ var buyables = {
 		"name": "Volcano",
 	},
 	"star": {
-		"passive_energy": 1000000,
+		"passive_energy": 50000000,
 		"heat": 3,
 		"max_amount": 10,
 		"cost": 1000000000,
