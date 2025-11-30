@@ -5,15 +5,14 @@ var upgrades = {
 		"description": "Involve yourself in politics to gain POWER. Increases your energy cap to 25K, and gives access to new items in the Store.",
 		"name": "Politics",
 		"costs": {
-			"energy": 2500
+			"energy": 5000
 		}
 	},
 	"advanced_technology": {
 		"description": "Research more advanced and efficient ways to produce heat.",
 		"name": "Advanced Technology",
 		"costs": {
-			"energy": 15000,
-			"power": 750
+			"energy": 15000
 		}
 	},
 	"deregulation": {
@@ -21,20 +20,28 @@ var upgrades = {
 		"name": "Deregulation",
 		"costs": {
 			"energy": 20000,
-			"power": 4000,
+			"power": 7000,
 			"upgrade": "politics"
 		},
 		"requires_upgrade": "politics"
 	},
 	"president": {
-		"description": "Become the president of [MYSTERY COUNTRY]! x2 POWER multiplier, increases POWER cap to 25K.",
+		"description": "Become the president of [MYSTERY COUNTRY]! x2 POWER multiplier, increases POWER cap to 100K.",
 		"name": "Presidency",
 		"costs": {
-			"energy": 20000,
-			"power": 5000,
+			"energy": 50000,
+			"power": 50000,
 			"upgrade": "politics"
 		},
-		"requires_upgrade": "politics"
+	},
+	"dictatorship": {
+		"description": "Become a dictator for total contro! Additional x2 POWER multiplier, increases POWER cap to 200K.",
+		"name": "Presidency",
+		"costs": {
+			"energy": 100000,
+			"power": 50000,
+			"upgrade": "president"
+		},
 	},
 	"research": {
 		"description": "Reveals new",
@@ -91,12 +98,21 @@ var buyables = {
 	"bribe": {
 		"passive_energy": 0,
 		"passive_power": 5,
-		"heat": 0.1,
+		"heat": 0,
 		"max_amount": 10,
 		"cost": 5000,
 		"requires_upgrade": "politics",
 		
 		"name": "Bribe",
+	},
+	"news_manipulation": {
+		"passive_power": 50,
+		"heat": 0,
+		"max_amount": 10,
+		"cost_power": 3000,
+		"requires_upgrade": "politics",
+		
+		"name": "News Manipulation",
 	},
 	"ai_datacenter": {
 		"passive_energy": 0,

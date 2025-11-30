@@ -116,20 +116,31 @@ func _process(delta: float) -> void:
 		
 		temperature = -10
 		
-		for n in boughts.keys():
-			energy += global.buyables[n].passive_energy * boughts[n]
+		var power_multiplier = 1
+		if upgrades.president: power_multiplier *= 2
+		
+		for n in boughts.keys(): 
+			if global.buyables[n].has("passive_power"): power += global.buyables[n].passive_power * boughts[n] * power_multiplier
+			else: energy += global.buyables[n].passive_energy * boughts[n]
 			
 			temperature += global.buyables[n].heat * boughts[n]
 			
 		if upgrades.deregulation:
 			if energy > 100000:
 				energy = 100000
-		if upgrades.politics:
+		elif upgrades.politics:
 			if energy > 25000:
 				energy = 25000
 		else:
 			if energy > 10000:
 				energy = 10000
+				
+		if upgrades.president:
+			if energy > 100000:
+				energy = 100000
+		else:
+			if energy > 50000:
+				energy = 50000
 		
 	$Jeffery.rotation_degrees /= 1 + (delta * 6)
 	$Jeffery.scale.x -= ($Jeffery.scale.x - 1) * (delta * 3)

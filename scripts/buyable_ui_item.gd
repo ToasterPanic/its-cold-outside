@@ -33,9 +33,16 @@ func _process(delta: float) -> void:
 		visible = game.upgrades[global.buyables[get_meta("type")].requires_upgrade]
 
 func _on_buy_pressed() -> void:
-	if game.energy >= global.buyables[get_meta("type")].cost:
-		game.energy -= global.buyables[get_meta("type")].cost
+	var buying = true
+	
+	if global.buyables[get_meta("type")].has("cost_power"):
+		if game.power >= global.buyables[get_meta("type")].cost_power: game.power -= global.buyables[get_meta("type")].cost_power
+		else: buying = false
+	else:
+		if game.energy >= global.buyables[get_meta("type")].cost: game.energy -= global.buyables[get_meta("type")].cost
+		else: buying = false
 		
+	if buying:
 		game.boughts[get_meta("type")] += 1
 		
 		$Bottom/HBoxContainer/None.visible = false
