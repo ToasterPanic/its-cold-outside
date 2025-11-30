@@ -4,6 +4,7 @@ var power = 0
 var energy = 0
 var temperature = -10
 var tutorial_progress = 0
+var energy_capped = false
 var boughts = {
 	
 }
@@ -11,7 +12,7 @@ var upgrades = {
 	
 }
 
-var time_to_next_passive_power = 1
+var time_to_next_passive_power = 0.01
 var time_to_next_autosave = 2
 
 var buyable_ui_item_scene = preload("res://scenes/buyable_ui_item.tscn")
@@ -125,22 +126,44 @@ func _process(delta: float) -> void:
 			
 			temperature += global.buyables[n].heat * boughts[n]
 			
+		var energy_capped = false
+			
 		if upgrades.deregulation:
 			if energy > 100000:
 				energy = 100000
+				energy_capped = true
 		elif upgrades.politics:
 			if energy > 25000:
 				energy = 25000
+				energy_capped = true
 		else:
 			if energy > 10000:
 				energy = 10000
+				energy_capped = true
+				
+		var power_capped = false
 				
 		if upgrades.president:
-			if energy > 100000:
-				energy = 100000
+			if power > 100000:
+				power = 100000
+				power_capped = true
 		else:
-			if energy > 50000:
-				energy = 50000
+			if power > 50000:
+				power = 50000
+				power_capped = true
+				
+		var alert_text = ""
+				
+		
+		
+		if energy_capped:
+			alert_text = alert_text + "[font size=32]Energy Cap Reached[/font]\nThe energy cap has been reached, meaning you cannot gain more energy. You can get upgrades to increase this value."
+		if power_capped:
+			alert_text = alert_text + "[font size=32]Power Cap Reached[/font]\nThe power cap has been reached, meaning you cannot gain more power. You can get upgrades to increase this value."
+				
+		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, alert_text == "")
+			
+		$"CanvasLayer/Control/Panel/Tabs/ALERT!/VBox/Text".text = alert_text
 		
 	$Jeffery.rotation_degrees /= 1 + (delta * 6)
 	$Jeffery.scale.x -= ($Jeffery.scale.x - 1) * (delta * 3)

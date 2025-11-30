@@ -35,8 +35,8 @@ var upgrades = {
 		},
 	},
 	"dictatorship": {
-		"description": "Become a dictator for total contro! Additional x2 POWER multiplier, increases POWER cap to 200K.",
-		"name": "Presidency",
+		"description": "Gain total control! Additional x2 POWER multiplier, increases POWER cap to 200K.",
+		"name": "Dictatorship",
 		"costs": {
 			"energy": 100000,
 			"power": 50000,
@@ -109,7 +109,7 @@ var buyables = {
 		"passive_power": 50,
 		"heat": 0,
 		"max_amount": 10,
-		"cost_power": 3000,
+		"cost_power": 1000,
 		"requires_upgrade": "politics",
 		
 		"name": "News Manipulation",
