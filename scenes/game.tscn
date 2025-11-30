@@ -32,7 +32,8 @@ font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_yqjtg"]
 font_size = 48
-outline_size = 4
+font_color = Color(0, 1, 1, 1)
+outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
@@ -302,7 +303,7 @@ alignment = 1
 
 [node name="BuyPotatoCrop" type="Button" parent="CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/HFlowContainer"]
 layout_mode = 2
-text = "Buy new Potato crop [500K ENERGY]"
+text = "Plant a Potato [100K ENERGY]"
 
 [node name="SelectedImage" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox"]
 visible = false

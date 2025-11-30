@@ -358,6 +358,11 @@ func _on_tabs_tab_changed(tab: int) -> void:
 
 
 func _on_buy_potato_crop_pressed() -> void:
+	if energy < 100000:
+		return
+		
+	energy -= 100000
+	
 	var crop = crop_scene.instantiate()
 	
 	crop.game = self
