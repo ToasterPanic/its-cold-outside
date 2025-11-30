@@ -401,7 +401,7 @@ func _on_mutate_crop_pressed() -> void:
 
 
 func _on_ascend_pressed() -> void:
-	if potatoes < (10 * (10 ^ ascensions)):
+	if potatoes < (10 * (10 ** ascensions)):
 		$Error.play()
 		return 
 	
