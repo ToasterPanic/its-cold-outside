@@ -191,6 +191,10 @@ func _process(delta: float) -> void:
 		
 		save_game()
 		
+		$CanvasLayer/Control/Panel/Tabs/Status/VBox/Ascension.visible = upgrades.potato_ascension
+		if ascensions > 0:
+			$CanvasLayer/Control/Panel/Tabs/Status/VBox/Ascension/Ascend.text = "ASCEND [%s POTATOES]" % [global.numtext(10 * (10 ** floori(ascensions * 2)))]
+		
 		temperature = -10
 		
 		var energy_per_second = 0
@@ -397,6 +401,10 @@ func _on_mutate_crop_pressed() -> void:
 
 
 func _on_ascend_pressed() -> void:
+	if potatoes < (10 * (10 ^ ascensions)):
+		$Error.play()
+		return 
+	
 	var dir = DirAccess.remove_absolute("user://savegame.save")
 	
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
