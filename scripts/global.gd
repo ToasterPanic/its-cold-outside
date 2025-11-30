@@ -34,6 +34,13 @@ var upgrades = {
 			"upgrade": "politics"
 		},
 	},
+	"potato_ascension": {
+		"description": "Farm potatoes for the Potato God. Farm potatoes for the Potato God. Farm potatoes for the Potato God. Farm potatoes for the Potato God. Farm potatoes for the Potato God.",
+		"name": "Potato Ascension",
+		"costs": {
+			"energy": 50000
+		},
+	},
 	"dictatorship": {
 		"description": "Gain total control! Increases energy cap to 250B, increases POWER cap to 200K.",
 		"name": "Dictatorship",
@@ -50,6 +57,15 @@ var upgrades = {
 			"energy": 1000000,
 			"upgrade": "advanced_technology"
 		}
+	},
+	"power_of_god": {
+		"description": "Gain the powers of god! Removes energy and power caps.",
+		"name": "Power of God",
+		"costs": {
+			"energy": 250000000000,
+			"power": 50000,
+			"upgrade": "dictatorship",
+		},
 	},
 }
 
@@ -151,6 +167,15 @@ var buyables = {
 		
 		"name": "News Manipulation",
 	},
+}
+
+var crops = {
+	"potato": {
+		"time_to_grow": 30,
+		"result_min": 1,
+		"result_max": 2,
+		"sensitivity": 0.1,
+	}
 }
 
 # Takes a number, makes it a string, abbreviates it by size

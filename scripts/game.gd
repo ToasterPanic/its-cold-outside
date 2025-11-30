@@ -2,6 +2,7 @@ extends Node2D
 
 var power = 0
 var energy = 0
+var potatoes = 0
 var temperature = -10
 var tutorial_progress = 0
 var rebirths = 0
@@ -10,6 +11,8 @@ var energy_capped = false
 var master_volume = 1
 var music_volume = 1
 var sfx_volume = 1
+
+var selected_crop = null
 
 var boughts = {
 	
@@ -26,8 +29,15 @@ var time_to_next_autosave = 2
 
 var buyable_ui_item_scene = preload("res://scenes/buyable_ui_item.tscn")
 var buyable_upgrade_item_scene = preload("res://scenes/buyable_upgrade_item.tscn")
+var crop_scene = preload("res://scenes/crop.tscn")
 
 func save():
+	var crops = []
+	for n in $"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Crops".get_children():
+		crops.push_front({
+			"type": n.type, "progress": n.progress
+		})
+	
 	var save_dict = {
 		"energy" : energy,
 		"power" : power,
@@ -38,7 +48,9 @@ func save():
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
 		"total_energy_produced": total_energy_produced,
-		"total_power_produced": total_power_produced
+		"total_power_produced": total_power_produced,
+		"crops": crops,
+		"potatoes": potatoes
 	}
 	return save_dict
 	
@@ -110,6 +122,16 @@ func _ready() -> void:
 				total_energy_produced = json.data.total_energy_produced
 				total_power_produced = json.data.total_power_produced
 				
+			if json.data.has("crops"): 
+				for n in json.data.crops:
+					var crop = crop_scene.instantiate()
+					
+					crop.type = n.type
+					crop.progress = n.progress
+					crop.game = self
+					
+					$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Crops".add_child(crop)
+				
 			AudioServer.set_bus_volume_linear(0, master_volume)
 			AudioServer.set_bus_volume_linear(1, music_volume)
 			AudioServer.set_bus_volume_linear(2, sfx_volume)
@@ -166,7 +188,9 @@ func _process(delta: float) -> void:
 			
 		var energy_capped = false
 			
-		if upgrades.dictatorship:
+		if upgrades.power_of_god:
+			pass
+		elif upgrades.dictatorship:
 			if energy > 250000000000:
 				energy = 250000000000
 				energy_capped = true
@@ -185,7 +209,14 @@ func _process(delta: float) -> void:
 				
 		var power_capped = false
 				
-		if upgrades.president:
+				
+		if upgrades.power_of_god:
+			pass
+		elif upgrades.dictatorship:
+			if power > 200000:
+				power = 200000
+				power_capped = true
+		elif upgrades.president:
 			if power > 100000:
 				power = 100000
 				power_capped = true
@@ -222,9 +253,17 @@ Total POWER produced: %s""" % [
 	$Jeffery.scale.x -= ($Jeffery.scale.x - 1) * (delta * 3)
 	$Jeffery.scale.y = $Jeffery.scale.x
 	
+	$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/SelectedDetails".visible = selected_crop != null
+	$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Selection".visible = selected_crop != null
+	$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/SelectedImage".visible = selected_crop != null
+	if selected_crop:
+		$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/SelectedImage/TextureRect".texture = selected_crop.texture_normal
+	
 	$CanvasLayer/Control/StatMeter.text = global.numtext(energy) + " ENERGY"
 	if power > 0:
 		$CanvasLayer/Control/StatMeter.text = $CanvasLayer/Control/StatMeter.text + "\n" + global.numtext(power) + " POWER"
+	if potatoes > 0:
+		$CanvasLayer/Control/StatMeter.text = $CanvasLayer/Control/StatMeter.text + "\n" + global.numtext(potatoes) + " POTATOES"
 	
 	$CanvasLayer/Control/TemperatureMeter.text = global.numtext(temperature) + "°"
 
@@ -285,3 +324,11 @@ func _on_sfx_volume_value_changed(value: float) -> void:
 
 func _on_tabs_tab_changed(tab: int) -> void:
 	$Click.play()
+
+
+func _on_buy_potato_crop_pressed() -> void:
+	var crop = crop_scene.instantiate()
+	
+	crop.game = self
+	
+	$"CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Crops".add_child(crop)

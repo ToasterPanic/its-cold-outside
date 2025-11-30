@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://chc8dyiqgolmk"]
+
+[ext_resource type="Texture2D" uid="uid://nqp63ung38fx" path="res://textures/crops/potato_growing.png" id="1_pl0dt"]
+[ext_resource type="Script" uid="uid://ynf7xy8owuss" path="res://scripts/crop.gd" id="2_fe780"]
+
+[node name="Crop" type="TextureButton"]
+custom_minimum_size = Vector2(64, 64)
+button_mask = 3
+texture_normal = ExtResource("1_pl0dt")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_fe780")
+
+[node name="Progress" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "50%"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
