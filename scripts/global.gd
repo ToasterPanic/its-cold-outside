@@ -16,7 +16,7 @@ var upgrades = {
 		}
 	},
 	"deregulation": {
-		"description": "Convince the government to give you the freedom to destroy the planet more. Increases your energy cap to 100K.",
+		"description": "Convince the government to give you the freedom to destroy the planet more. Increases your energy cap to 1M.",
 		"name": "Deregulation",
 		"costs": {
 			"energy": 20000,
@@ -88,9 +88,18 @@ var buyables = {
 	},
 	"power_plant": {
 		"passive_energy": 3000,
-		"heat": 0.4,
+		"heat": 0.3,
 		"max_amount": 10,
 		"cost": 50000,
+		"requires_upgrade": "advanced_technology",
+		
+		"name": "Power Plant",
+	},
+	"ai_datacenter": {
+		"passive_energy": 40000,
+		"heat": 0.5,
+		"max_amount": 10,
+		"cost": 100000,
 		"requires_upgrade": "advanced_technology",
 		
 		"name": "Power Plant",
@@ -113,16 +122,6 @@ var buyables = {
 		"requires_upgrade": "politics",
 		
 		"name": "News Manipulation",
-	},
-	"ai_datacenter": {
-		"passive_energy": 0,
-		"passive_power": 25,
-		"heat": 0.1,
-		"max_amount": 10,
-		"cost": 100000,
-		"requires_upgrade": "advanced_technology",
-		
-		"name": "AI Datacenter",
 	},
 }
 

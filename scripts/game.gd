@@ -5,6 +5,11 @@ var energy = 0
 var temperature = -10
 var tutorial_progress = 0
 var energy_capped = false
+
+var master_volume = 1
+var music_volume = 1
+var sfx_volume = 1
+
 var boughts = {
 	
 }
@@ -24,7 +29,10 @@ func save():
 		"power" : power,
 		"upgrades": upgrades,
 		"boughts": boughts,
-		"tutorial_progress": tutorial_progress
+		"tutorial_progress": tutorial_progress,
+		"master_volume": master_volume,
+		"music_volume": music_volume,
+		"sfx_volume": sfx_volume
 	}
 	return save_dict
 	
@@ -86,6 +94,16 @@ func _ready() -> void:
 			energy = floori(json.data.energy)
 			boughts = json.data.boughts
 			upgrades = json.data.upgrades
+			
+			if json.data.has("master_volume"):
+				master_volume = json.data.master_volume
+				music_volume = json.data.music_volume
+				sfx_volume = json.data.sfx_volume
+				
+			AudioServer.set_bus_volume_linear(0, master_volume)
+			AudioServer.set_bus_volume_linear(1, music_volume)
+			AudioServer.set_bus_volume_linear(2, sfx_volume)
+			
 			tutorial_progress = floori(json.data.tutorial_progress)
 			print("TUT" + global.numtext(tutorial_progress))
 		
@@ -129,8 +147,8 @@ func _process(delta: float) -> void:
 		var energy_capped = false
 			
 		if upgrades.deregulation:
-			if energy > 100000:
-				energy = 100000
+			if energy > 1000000:
+				energy = 1000000
 				energy_capped = true
 		elif upgrades.politics:
 			if energy > 25000:
@@ -213,3 +231,16 @@ func _on_jeffery_pressed() -> void:
 	$Jeffery.scale.y = 1.1
 	
 	$Jeffery/ClickHint.visible = false
+
+
+func _on_master_volume_value_changed(value: float) -> void: 
+	master_volume = value
+	AudioServer.set_bus_volume_linear(0, value)
+
+func _on_music_volume_value_changed(value: float) -> void:
+	music_volume = value
+	AudioServer.set_bus_volume_linear(1, value)
+
+func _on_sfx_volume_value_changed(value: float) -> void:
+	sfx_volume = value
+	AudioServer.set_bus_volume_linear(2, value)

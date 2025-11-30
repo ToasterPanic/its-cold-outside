@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxwei7g8nehdn"]
+[gd_scene load_steps=10 format=3 uid="uid://cxwei7g8nehdn"]
 
 [ext_resource type="Texture2D" uid="uid://wn75psbolp0e" path="res://textures/jeffery.png" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dt25ajg5sqcl8" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="AudioStream" uid="uid://bndrkok1y707h" path="res://sounds/music.mp3" id="2_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://bvh21ly3w5evi" path="res://textures/hint_arrow.png" id="3_lnu2h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwrxv"]
@@ -26,6 +27,12 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_lbhrr")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -150,10 +157,13 @@ layout_mode = 2
 text = "Master Volume"
 label_settings = SubResource("LabelSettings_lnu2h")
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow"]
+[node name="MasterVolume" type="HSlider" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="Flow2" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox"]
 layout_mode = 2
@@ -163,10 +173,13 @@ layout_mode = 2
 text = "Music Volume"
 label_settings = SubResource("LabelSettings_lnu2h")
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow2"]
+[node name="MusicVolume" type="HSlider" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="Flow3" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox"]
 layout_mode = 2
@@ -176,10 +189,13 @@ layout_mode = 2
 text = "SFX Volume"
 label_settings = SubResource("LabelSettings_lnu2h")
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow3"]
+[node name="SFXVolume" type="HSlider" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow3"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/Panel/Tabs/Settings/VBox"]
 layout_mode = 2
@@ -244,3 +260,6 @@ pivot_offset = Vector2(256, 0)
 texture = ExtResource("3_lnu2h")
 
 [connection signal="pressed" from="Jeffery" to="." method="_on_jeffery_pressed"]
+[connection signal="value_changed" from="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow/MasterVolume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow2/MusicVolume" to="." method="_on_music_volume_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow3/SFXVolume" to="." method="_on_sfx_volume_value_changed"]
