@@ -35,6 +35,8 @@ func _on_pressed() -> void:
 			
 		game.stocks[get_meta("type")].bought -= 1
 		game.potatoes += game.stocks[get_meta("type")].value
+		
+		game.create_flying_number("+"+global.numtext(game.stocks[get_meta("type")].value)+" POT")
 	else:
 		if game.potatoes < game.stocks[get_meta("type")].value:
 			$Error.play()
@@ -42,3 +44,5 @@ func _on_pressed() -> void:
 			
 		game.potatoes -= game.stocks[get_meta("type")].value
 		game.stocks[get_meta("type")].bought += 1
+		
+		game.create_flying_number("-"+global.numtext(game.stocks[get_meta("type")].value)+" POT")

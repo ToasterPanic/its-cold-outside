@@ -36,6 +36,7 @@ var buyable_upgrade_item_scene = preload("res://scenes/buyable_upgrade_item.tscn
 var crop_scene = preload("res://scenes/crop.tscn")
 var alert_scene = preload("res://scenes/alert.tscn")
 var stock_item_scene = preload("res://scenes/stock_item.tscn")
+var flying_number_scene = preload("res://scenes/flying_number.tscn")
 
 func create_alert(name, desc):
 	var alert = alert_scene.instantiate()
@@ -44,6 +45,17 @@ func create_alert(name, desc):
 %s""" % [name, desc]
 
 	$CanvasLayer/Control/Alerts.add_child(alert)
+
+func create_flying_number(value):
+	var flying_number = flying_number_scene.instantiate()
+	
+	flying_number.text = value
+	
+	if value.contains("-"):
+		flying_number.label_settings = flying_number.label_settings.duplicate()
+		flying_number.label_settings.font_color = Color(1, 0, 0)
+	
+	add_child(flying_number)
 
 func save():
 	var crops = []
@@ -262,6 +274,11 @@ func _process(delta: float) -> void:
 			
 		total_energy_produced += energy_per_second
 		total_power_produced += power_per_second
+		
+		if energy_per_second > 0:
+			create_flying_number("+" + global.numtext(energy_per_second) + " E")
+		if power_per_second > 0:
+			create_flying_number("+" + global.numtext(power_per_second) + " POW")
 		
 		var send_energy_cap_alert = !energy_capped
 		var send_power_cap_alert = !power_capped
@@ -482,6 +499,7 @@ func _on_spin_slots_pressed() -> void:
 		return
 		
 	potatoes -= bet
+	create_flying_number("-"+global.numtext(bet)+" POT")
 	
 	$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow/SpinSlots.disabled = true 
 	
@@ -514,9 +532,10 @@ func _on_spin_slots_pressed() -> void:
 		
 		i += 1
 		
-	if $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot1.texture == $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot2.texture:
-		if $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot2.texture == $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot3.texture:
+	if $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot1.texture == $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot2.texture:
+		if $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot2.texture == $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot3.texture:
 			potatoes += bet * 10
+			create_flying_number("+"+global.numtext(bet * 10)+" POT")
 			
 			$Tada.play()
 			

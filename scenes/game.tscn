@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cxwei7g8nehdn"]
+[gd_scene load_steps=23 format=3 uid="uid://cxwei7g8nehdn"]
 
 [ext_resource type="Texture2D" uid="uid://wn75psbolp0e" path="res://textures/jeffery.png" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dt25ajg5sqcl8" path="res://scripts/game.gd" id="1_yqjtg"]
@@ -15,17 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://4857yvvw5rom" path="res://scenes/tree.tscn" id="8_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://b5bg1ltm73lio" path="res://textures/crops/potato_grown.png" id="10_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://dcipxbldb3vel" path="res://textures/bar.png" id="12_kvuet"]
-[ext_resource type="Script" uid="uid://dca64ll8kc8cu" path="res://scripts/flying_number.gd" id="13_rysoc"]
 [ext_resource type="Texture2D" uid="uid://cjavnh4emgat0" path="res://textures/hint_arrow_left.png" id="13_trtic"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwrxv"]
 outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_ssvqc"]
-font_size = 32
-font_color = Color(0, 1, 0, 1)
-outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnu2h"]
@@ -202,23 +195,6 @@ label_settings = SubResource("LabelSettings_uwrxv")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-
-[node name="FlyingNumber" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -36.5
-offset_top = -22.5
-offset_right = 36.5
-offset_bottom = 22.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-text = "+100"
-label_settings = SubResource("LabelSettings_ssvqc")
-script = ExtResource("13_rysoc")
 
 [node name="Sprite2D7" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(314, -219)

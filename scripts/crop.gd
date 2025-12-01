@@ -75,6 +75,8 @@ func _on_pressed() -> void:
 			addition *= 1.5
 		
 		game.potatoes += ceili(addition)
+		
+		game.create_flying_number("+" + global.numtext(ceili(addition)) + " POT")
 	else:
 		$PopFarming.play()
 		progress += 1.5 / global.crops[type].time_to_grow
