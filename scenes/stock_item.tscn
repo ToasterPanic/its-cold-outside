@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4qlg2rhadkqm"]
+
+[ext_resource type="Script" uid="uid://cv8mrmwkmenxy" path="res://scripts/stock_item.gd" id="1_hch1w"]
+[ext_resource type="AudioStream" uid="uid://di1ukgv0fmkbn" path="res://sounds/error.mp3" id="2_hch1w"]
+
+[node name="StockItem" type="Button"]
+custom_minimum_size = Vector2(256, 256)
+button_mask = 3
+script = ExtResource("1_hch1w")
+
+[node name="Error" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hch1w")
+
+[node name="Label" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[color=f00][font size=48]APPL[/font] 32¤
+[font size=24]1 share[/font]"
+
+[node name="Flow" type="HFlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/h_separation = 0
+alignment = 2
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

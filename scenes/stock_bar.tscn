@@ -1,6 +1,24 @@
 [gd_scene format=3 uid="uid://gy5bcmmwlycs"]
 
-[node name="StockBar" type="ColorRect"]
-custom_minimum_size = Vector2(16, 32)
-color = Color(1, 0, 0, 1)
+[node name="StockBar" type="Control"]
+custom_minimum_size = Vector2(32, 256)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 32.0
+mouse_filter = 2
 metadata/value = 0.0
+
+[node name="Color" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_right = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(1, 0, 0, 1)

@@ -34,20 +34,20 @@ var upgrades = {
 			"upgrade": "politics"
 		},
 	},
-	"stock_market": {
-		"description": "Gain access to the stock market. Buy low, sell high. Simple.",
-		"name": "Stock Market",
-		"costs": {
-			"energy": 50000,
-			"power": 50000,
-			"upgrade": "politics"
-		},
-	},
 	"potato_ascension": {
 		"description": "Farm potatoes for the Potato God. Allows you to Ascend (find it in the Status tab).",
 		"name": "Potato Ascension",
 		"costs": {
 			"energy": 50000
+		},
+	},
+	"stock_market": {
+		"description": "Gain access to the stock market. Buy low, sell high. Why is it powered by potatoes? Gameplay reasons.",
+		"name": "Stock Market",
+		"costs": {
+			"energy": 50000,
+			"power": 50000,
+			"upgrade": "potato_ascension"
 		},
 	},
 	"dictatorship": {
@@ -228,32 +228,46 @@ var crops = {
 
 var stocks = {
 	"PEAR": {
-		"stability": 0.7,
-		"size": 10,
+		"stability": 0.85,
+		"size": 6,
 		"min_value": 20,
 		"max_value": 500,
 		"minimum_direction_time": 5,
 	},
 	"SFI": {
-		"stability": 0.7,
-		"size": 10,
-		"min_value": 20,
+		"stability": 0.666,
+		"size": 40,
+		"min_value": 350,
 		"max_value": 500,
-		"minimum_direction_time": 5,
+		"minimum_direction_time": 2,
 	},
 	"UWU": {
-		"stability": 0.7,
-		"size": 10,
+		"stability": 0.95,
+		"size": 4,
 		"min_value": 20,
 		"max_value": 500,
-		"minimum_direction_time": 5,
+		"minimum_direction_time": 10,
 	},
 	"HACK": {
-		"stability": 0.7,
-		"size": 10,
+		"stability": 0.9,
+		"size": 8,
+		"min_value": 20,
+		"max_value": 300,
+		"minimum_direction_time": 6,
+	},
+	"LTT": {
+		"stability": 0.85,
+		"size": 4,
 		"min_value": 20,
 		"max_value": 500,
-		"minimum_direction_time": 5,
+		"minimum_direction_time": 10,
+	},
+	"AJAJ": {
+		"stability": 0.9,
+		"size": 8,
+		"min_value": 20,
+		"max_value": 100,
+		"minimum_direction_time": 6,
 	},
 }
 
@@ -262,20 +276,20 @@ func numtext(number) -> String:
 	if number >= 1e27:
 		return str(floorf(number / 0.1e27) / 10) + "Oc"
 	if number >= 1e24:
-		return str(floorf(number / 0.1e24) / 10) + "Sp"
+		return str(floori(number / 0.1e24) / 10) + "Sp"
 	if number >= 1e21:
-		return str(floorf(number / 0.1e21) / 10) + "Sx"
+		return str(floori(number / 0.1e21) / 10) + "Sx"
 	if number >= 1e18:
-		return str(floorf(number / 0.1e18) / 10) + "Qi"
+		return str(floori(number / 0.1e18) / 10) + "Qi"
 	if number >= 1e15:
-		return str(floorf(number / 0.1e15) / 10) + "Qa"
+		return str(floori(number / 0.1e15) / 10) + "Qa"
 	if number >= 1e12:
-		return str(floorf(number / 0.1e12) / 10) + "Tr"
+		return str(floori(number / 0.1e12) / 10) + "Tr"
 	if number >= 1e9:
-		return str(floorf(number / 0.1e9) / 10) + "B"
+		return str(floori(number / 0.1e9) / 10) + "B"
 	if number >= 1e6:
-		return str(floorf(number / 0.1e6) / 10) + "M"
+		return str(floori(number / 0.1e6) / 10) + "M"
 	if number >= 10e3:
-		return str(floorf(number / 0.1e3) / 10) + "K"
+		return str(floori(number / 0.1e3) / 10) + "K"
 	
 	return str(number)

@@ -23,6 +23,8 @@ var upgrades = {
 	
 }
 
+var stocks = {}
+
 var total_energy_produced = 0
 var total_power_produced = 0
 
@@ -33,6 +35,7 @@ var buyable_ui_item_scene = preload("res://scenes/buyable_ui_item.tscn")
 var buyable_upgrade_item_scene = preload("res://scenes/buyable_upgrade_item.tscn")
 var crop_scene = preload("res://scenes/crop.tscn")
 var alert_scene = preload("res://scenes/alert.tscn")
+var stock_item_scene = preload("res://scenes/stock_item.tscn")
 
 func create_alert(name, desc):
 	var alert = alert_scene.instantiate()
@@ -86,10 +89,14 @@ func set_power(val):
 
 func set_energy(val):
 	energy = val
+	
+func set_potatoes(val):
+	potatoes = val 
 
 func _ready() -> void:
 	LimboConsole.register_command(set_power)
 	LimboConsole.register_command(set_energy)
+	LimboConsole.register_command(set_potatoes)
 	LimboConsole.register_command(delete_save_game)
 	
 	$Camera2D.position.x = 0
@@ -109,8 +116,6 @@ func _ready() -> void:
 		var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 		while save_file.get_position() < save_file.get_length():
 			var json_string = save_file.get_line()
-			
-			print(json_string)
 
 			# Creates the helper class to interact with JSON.
 			var json = JSON.new()
@@ -183,6 +188,20 @@ func _ready() -> void:
 		buyable_upgrade_item.game = self
 		
 		$CanvasLayer/Control/Panel/Tabs/Upgrades/VBox.add_child(buyable_upgrade_item)
+		
+	for n in global.stocks.keys():
+		if !stocks.has(n): stocks[n] = {
+			"up": true,
+			"time": 0,
+			"value": 200,
+			"bought": 0,
+		}
+		
+		var stock_item = stock_item_scene.instantiate()
+		stock_item.set_meta("type", n)
+		stock_item.game = self
+		
+		$"CanvasLayer/Control/Panel/Tabs/Stock Market/VBox/Stocks".add_child(stock_item)
 
 func _process(delta: float) -> void:
 	time_to_next_passive_power -= delta
@@ -194,6 +213,30 @@ func _process(delta: float) -> void:
 		$CanvasLayer/Control/Panel/Tabs/Status/VBox/Ascension.visible = upgrades.potato_ascension
 		if ascensions > 0:
 			$CanvasLayer/Control/Panel/Tabs/Status/VBox/Ascension/Ascend.text = "ASCEND [%s POTATOES]" % [global.numtext(10 * (10 ** floori(ascensions * 2)))]
+			
+		for n in stocks:
+			if stocks[n].time > global.stocks[n].minimum_direction_time:
+				if randf() > global.stocks[n].stability:
+					stocks[n].up = !stocks[n].up
+					stocks[n].time = 0
+			
+			var change = randi_range(global.stocks[n].size / 2, global.stocks[n].size)
+			if stocks[n].up:
+				stocks[n].value += change
+			else:
+				stocks[n].value -= change
+				
+			if stocks[n].value > global.stocks[n].max_value:
+				stocks[n].up = false
+				stocks[n].time = -3
+			elif stocks[n].value < global.stocks[n].min_value:
+				stocks[n].up = true
+				stocks[n].time = -3
+				
+			stocks[n].time += 1
+			
+		for n in $"CanvasLayer/Control/Panel/Tabs/Stock Market/VBox/Stocks".get_children():
+			n.bar_graph_update()
 		
 		temperature = -10
 		
