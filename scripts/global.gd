@@ -76,6 +76,14 @@ var upgrades = {
 			"upgrade": "dictatorship",
 		},
 	},
+	"auto_farming": {
+		"description": "Automatically farms potatoes for you.",
+		"name": "Auto Farming",
+		"costs": {
+			"energy": 350000000000,
+			"ascension": 1
+		},
+	},
 }
 
 var buyables = {

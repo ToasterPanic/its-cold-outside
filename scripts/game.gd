@@ -183,6 +183,10 @@ func _ready() -> void:
 	for n in global.upgrades.keys():
 		if !upgrades.has(n): upgrades[n] = false
 		
+		if global.upgrades[n].costs.has("ascension"):
+			if global.upgrades[n].costs.ascension < ascensions:
+				continue
+		
 		var buyable_upgrade_item = buyable_upgrade_item_scene.instantiate()
 		buyable_upgrade_item.set_meta("type", n)
 		buyable_upgrade_item.game = self

@@ -40,7 +40,10 @@ func _process(delta: float) -> void:
 	else:
 		modulate = Color(1, 1, 1)
 		
-	if progress == -1: return
+	if progress == -1: 
+		if game.upgrades.auto_farming:
+			_on_pressed()
+		return
 	
 	progress += delta / global.crops[type].time_to_grow
 	
