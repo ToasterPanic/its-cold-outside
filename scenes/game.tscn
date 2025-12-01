@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cxwei7g8nehdn"]
+[gd_scene load_steps=25 format=3 uid="uid://cxwei7g8nehdn"]
 
 [ext_resource type="Texture2D" uid="uid://wn75psbolp0e" path="res://textures/jeffery.png" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dt25ajg5sqcl8" path="res://scripts/game.gd" id="1_yqjtg"]
@@ -9,12 +9,23 @@
 [ext_resource type="AudioStream" uid="uid://2gikkidnupkb" path="res://sounds/jeffery.mp3" id="4_gee14"]
 [ext_resource type="AudioStream" uid="uid://di1ukgv0fmkbn" path="res://sounds/error.mp3" id="5_dinhu"]
 [ext_resource type="Script" uid="uid://s2co8j47cw4r" path="res://scripts/tree.gd" id="5_vtaks"]
+[ext_resource type="AudioStream" uid="uid://daq34x6608vyl" path="res://sounds/drumroll.mp3" id="6_ca42v"]
 [ext_resource type="Texture2D" uid="uid://dl60kqsx1d4mf" path="res://textures/ground_no_snow.png" id="7_kvpfn"]
+[ext_resource type="AudioStream" uid="uid://bstynb4se7kuw" path="res://sounds/tada.mp3" id="7_rysoc"]
 [ext_resource type="PackedScene" uid="uid://4857yvvw5rom" path="res://scenes/tree.tscn" id="8_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://b5bg1ltm73lio" path="res://textures/crops/potato_grown.png" id="10_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://dcipxbldb3vel" path="res://textures/bar.png" id="12_kvuet"]
+[ext_resource type="Script" uid="uid://dca64ll8kc8cu" path="res://scripts/flying_number.gd" id="13_rysoc"]
+[ext_resource type="Texture2D" uid="uid://cjavnh4emgat0" path="res://textures/hint_arrow_left.png" id="13_trtic"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uwrxv"]
 outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ssvqc"]
+font_size = 32
+font_color = Color(0, 1, 0, 1)
+outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnu2h"]
@@ -56,6 +67,14 @@ bus = &"SFX"
 
 [node name="Error" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_dinhu")
+bus = &"SFX"
+
+[node name="Drumroll" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ca42v")
+bus = &"SFX"
+
+[node name="Tada" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rysoc")
 bus = &"SFX"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -184,6 +203,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="FlyingNumber" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -22.5
+offset_right = 36.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "+100"
+label_settings = SubResource("LabelSettings_ssvqc")
+script = ExtResource("13_rysoc")
+
 [node name="Sprite2D7" parent="." instance=ExtResource("8_0tnpc")]
 position = Vector2(314, -219)
 
@@ -223,7 +259,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-current_tab = 5
+current_tab = 6
 
 [node name="ALERT!" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
 visible = false
@@ -364,6 +400,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="Stock Market" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lnu2h")
 metadata/_tab_index = 5
@@ -381,11 +418,126 @@ text = "Left-click to buy a share. Right-click to sell a share."
 layout_mode = 2
 alignment = 1
 
+[node name="Gambling" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lnu2h")
+metadata/_tab_index = 6
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/Panel/Tabs/Gambling"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox"]
+layout_mode = 2
+text = "Enter in a bet, then push the button to start. 
+Remember, the house always wins."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Row1" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Slot1" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Slot2" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Slot3" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Row2" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftArrow" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("13_trtic")
+expand_mode = 1
+
+[node name="Slot1" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Slot2" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Slot3" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="RightArrow" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("3_lnu2h")
+expand_mode = 1
+
+[node name="Row3" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Slot1" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row3"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Slot2" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row3"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Slot3" type="TextureRect" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row3"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("12_kvuet")
+expand_mode = 2
+
+[node name="Flow" type="HFlowContainer" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow"]
+layout_mode = 2
+text = "Bet:"
+
+[node name="BetAmount" type="SpinBox" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+min_value = 100.0
+max_value = 9.223372e+18
+value = 100.0
+suffix = "POTATOES"
+
+[node name="SpinSlots" type="Button" parent="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow"]
+layout_mode = 2
+text = "PUSH TO SPIN!!!!!!"
+
 [node name="Settings" type="ScrollContainer" parent="CanvasLayer/Control/Panel/Tabs"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_lnu2h")
-metadata/_tab_index = 6
+metadata/_tab_index = 7
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/Panel/Tabs/Settings"]
 layout_mode = 2
@@ -547,6 +699,7 @@ alignment = 2
 [connection signal="pressed" from="CanvasLayer/Control/Panel/Tabs/Status/VBox/Ascension/Ascend" to="." method="_on_ascend_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/HFlowContainer/BuyPotatoCrop" to="." method="_on_buy_potato_crop_pressed"]
 [connection signal="pressed" from="CanvasLayer/Control/Panel/Tabs/Potato Farming/VBox/Selection/MutateCrop" to="." method="_on_mutate_crop_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow/SpinSlots" to="." method="_on_spin_slots_pressed"]
 [connection signal="value_changed" from="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow/MasterVolume" to="." method="_on_master_volume_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow2/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Control/Panel/Tabs/Settings/VBox/Flow3/SFXVolume" to="." method="_on_sfx_volume_value_changed"]

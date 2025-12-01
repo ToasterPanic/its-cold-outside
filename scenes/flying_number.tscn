@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://ttoattwdysqu"]
+
+[ext_resource type="Script" uid="uid://dca64ll8kc8cu" path="res://scripts/flying_number.gd" id="1_blqb3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ssvqc"]
+font_size = 32
+font_color = Color(0, 1, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="FlyingNumber" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -22.5
+offset_right = 36.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "+100"
+label_settings = SubResource("LabelSettings_ssvqc")
+script = ExtResource("1_blqb3")

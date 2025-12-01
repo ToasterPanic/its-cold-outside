@@ -84,6 +84,14 @@ var upgrades = {
 			"ascension": 1
 		},
 	},
+	"gambling": {
+		"description": "Okay, this is just ridiculous.",
+		"name": "Gambling",
+		"costs": {
+			"energy": 350000000000,
+			"ascension": 1
+		},
+	},
 }
 
 var buyables = {

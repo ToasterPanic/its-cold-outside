@@ -319,6 +319,8 @@ func _process(delta: float) -> void:
 		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(0, true)
 		
 		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(4, !upgrades.potato_ascension)
+		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(5, !upgrades.stock_market)
+		$"CanvasLayer/Control/Panel/Tabs".set_tab_hidden(6, !upgrades.gambling)
 			
 		#$"CanvasLayer/Control/Panel/Tabs/ALERT!/VBox/Text".text = alert_text
 		
@@ -470,3 +472,52 @@ func _on_ascend_pressed() -> void:
 
 func _on_delete_save_meter_value_changed(value: float) -> void:
 	if value == 1: delete_save_game()
+
+
+func _on_spin_slots_pressed() -> void:
+	var bet = $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow/BetAmount.value 
+	
+	if potatoes < bet:
+		$Error.play()
+		return
+		
+	potatoes -= bet
+	
+	$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow/SpinSlots.disabled = true 
+	
+	var slot_items = [
+		"lucky_7",
+		"four_leaf_clover",
+		"cherry",
+		"heart",
+		"diamond",
+		"bar"
+	]
+	
+	$Drumroll.play()
+	
+	var i = 0
+	while i < 25:
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row3/Slot1.texture = $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot1.texture
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row3/Slot2.texture = $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot2.texture
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row3/Slot3.texture = $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot3.texture
+		
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot1.texture = $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot1.texture
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot2.texture = $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot2.texture
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row2/Slot3.texture = $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot3.texture
+		
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot1.texture = load("res://textures/" + slot_items[randi_range(0, slot_items.size() - 1)] +".png")
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot2.texture = load("res://textures/" + slot_items[randi_range(0, slot_items.size() - 1)] +".png")
+		$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot3.texture = load("res://textures/" + slot_items[randi_range(0, slot_items.size() - 1)] +".png")
+		
+		await get_tree().create_timer(0.1).timeout
+		
+		i += 1
+		
+	if $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot1.texture == $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot2.texture:
+		if $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot2.texture == $CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Row1/Slot3.texture:
+			potatoes += bet * 10
+			
+			$Tada.play()
+			
+	$CanvasLayer/Control/Panel/Tabs/Gambling/VBox/Flow/SpinSlots.disabled = false
